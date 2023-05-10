@@ -70,6 +70,7 @@ address Alokasi (infotype X/*, address_studio stud*/);
 address_film movie(infotype nama, infotype2 jam[3]);
 address_studio add_studio(address_studio first);
 void add_film(address_film *first, address_film *now);
+void addPrintFilm(address_film *head, address_film *now);
 //void print_studio(address_studio current);
 void print_film(address_film current);
 void display_studio(address_studio head);

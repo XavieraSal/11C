@@ -66,7 +66,7 @@ address Alokasi (infotype X/*, address_studio stud*/) {
 		// alokasi memori untuk array of pointers
 		for ( i = 0; i < 10; i++) {
 			P->cus_std[i] = (address_studio)malloc(sizeof(studio));
-			P->cus_std[i]->next_st = /*stud->next_st*/;
+			P->cus_std[i]->next_st = /*stud->next_st*/Nil;
 			P->cus_std[i]->studio = /*stud->studio*/0;
 			P->cus_std[i]->filmm = /*stud->filmm*/ Nil;
 		}
@@ -157,6 +157,13 @@ void print_film(address_film current) {
 	printf("\t\t\t\xC0\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC1\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC1\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC1\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xD9\n");
 }
 
+void addPrintFilm(address_film *head, address_film *now) {
+	if (*head == Nil) {
+		add_film(head, now);
+	}
+	print_film(*head);
+}
+
 void display_studio(address_studio head) {
 	address_studio p = head;
 	while (p != Nil) {
@@ -170,6 +177,7 @@ int cekKosong (antrean q) {
 	k = q.head == Nil && q.tail == Nil;
 	return (k);
 }
+
 void bikinQ(antrean *q) {
 	q->head = Nil;
 	q->tail = Nil;

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "header_arya.h"
+#include "header.h"
 #include <stdlib.h>
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
@@ -44,10 +44,7 @@ int main() {
 				}
 				break;
 			case 4 :
-				if (head == Nil) {
-					add_film(&head, &now);
-				}
-				print_film(head);
+				addPrintFilm(&head, &now);
 				break;
 		}
 		printf("\nKembali ke menu? [Y / N]\n");
