@@ -1,57 +1,51 @@
-#include "header_arya.h"
+#include "header.h"
 
-address_studio sStudio (infotype1 j) {
+address_studio sStudio (infotype1 j, address_film mov) {
 	address_studio A = (address_studio)malloc(sizeof(studio));
 	if (A != Nil) {
 		A->studio = j;
-		A->filmm = Nil;
+		A->filmm = mov;
 		A->next_st = Nil;
 	}
-	
 	return A;
 }
 
-address_loket alokasiLoket (infotype1 j, address_studio stud) {
+address_loket alokasiLoket (infotype1 j, address_studio stud, address cust) {
 	address_loket L;
 	L = (address_loket)malloc(sizeof(Loket));
 	if (L != Nil) {
 		L->bwh_studio = stud;
 		L->loket = j;
-		L->lkt_cus = Nil;
+		L->lkt_cus = cust;
 		L->next_loket = Nil;
 	}
 	return L;
 }
 
-address_loket Locket (infotype1 j, address_studio stud) {
+//address_loket Locket (infotype1 j, address_studio stud) {
+//	address_loket L, R;
+//	R = L;
+//	for (int i = 1; i < 3; i++) {
+//		while (R != Nil) {
+//			R = R->next_loket;
+//		}
+//		R = alokasiLoket(j, stud);
+//	}
+//	R->next_loket = L;
+//}
+
+address_loket Locket (infotype1 j, address_studio stud, address cust) {
 	address_loket L, R;
+	L = alokasiLoket(j, stud, cust);
 	R = L;
-	for (int i; i < 3; i++) {
-		while (R != Nil) {
+	if (R != Nil) {
+		for (int i = 1; i < 3; i++) {
+			R->next_loket = alokasiLoket(j+i, stud, cust);
 			R = R->next_loket;
 		}
-		R = alokasiLoket(j, stud);	
+		R->next_loket = L;
 	}
-	R->next_loket = L;
-	// menambahkan node kedua yang menunjuk ke node pertama
-	address_loket temp;
-	temp->bwh_studio = ;
-	if (temp == Nil) {
-		/* jika studio belum memiliki loket, maka loket pertama dan kedua
-		   akan menunjuk ke dirinya sendiri */
-		stud->next_st = L;
-		L->next_loket = L;
-	} else {
-		/* jika studio sudah memiliki loket, maka loket kedua akan
-		   menunjuk ke loket pertama dan loket terakhir (sebelum node baru)
-		   akan menunjuk ke node baru */
-		while (temp->next_loket != stud->next_st) {
-			temp = temp->next_loket;
-		}
-		temp->next_loket = L;
-		L->next_loket = stud->next_st;
-	}
-	return L;
+	return R;
 }
 
 //	if (K != Nil) {
@@ -61,7 +55,7 @@ address_loket Locket (infotype1 j, address_studio stud) {
 //		L = K;
 //	}
 
-address Alokasi (infotype X) {
+address Alokasi (infotype X/*, address_studio stud*/) {
 	int i;
 	address P;
 	P = (address)malloc(sizeof(customer));
@@ -72,9 +66,9 @@ address Alokasi (infotype X) {
 		// alokasi memori untuk array of pointers
 		for ( i = 0; i < 10; i++) {
 			P->cus_std[i] = (address_studio)malloc(sizeof(studio));
-			P->cus_std[i]->next_st = Nil;
-			P->cus_std[i]->studio = 0;
-			P->cus_std[i]->filmm = Nil;
+			P->cus_std[i]->next_st = /*stud->next_st*/;
+			P->cus_std[i]->studio = /*stud->studio*/0;
+			P->cus_std[i]->filmm = /*stud->filmm*/ Nil;
 		}
 	} else {
 		printf("Alokasi gagal");
@@ -98,11 +92,13 @@ address_film movie(infotype nama, infotype2 jam[3]) {
 	return(f);
 }
 
-address_studio add_studio(address_studio first) {
 //	infotype1 nomor_studio[] = {1, 2, 3};
-	int i;
+address_studio add_studio(address_studio first) {
+	infotype1 i;
+	address_film mov;
+//	address_studio st;
 	for (i = 0; i < 3; i++) {
-		address_studio s = sStudio(i+1);
+		address_studio s = sStudio(i+1, mov);
 		if (s != Nil) {
 			if (first == Nil) {
 				first = s;
@@ -179,11 +175,11 @@ void bikinQ(antrean *q) {
 	q->tail = Nil;
 }
 
-void insertCus(address* L, infotype X) { //aku ubah parameter antrean jadi address.
+void insertCus(address* L, infotype X/*, address_studio stud*/) { //aku ubah parameter antrean jadi address.
 
 	address P;
 
-	P = Alokasi (X); //parameter integer aku hapus soalnya kamu deklar tapi ga dipake
+	P = Alokasi (X/*, stud*/); //parameter integer aku hapus soalnya kamu deklar tapi ga dipake
 	if (P != Nil) {
 		Insertlastcust(&(*L), P);
 	}

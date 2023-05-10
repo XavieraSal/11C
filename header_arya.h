@@ -62,11 +62,11 @@ typedef struct lkt {
 } Loket;
 
 
-address_studio sStudio (infotype1 j);
-address_loket alokasiLoket (infotype1 j, address_studio stud);
-address_loket Locket (infotype1 j, address_studio stud);
+address_studio sStudio (infotype1 j, address_film mov);
+address_loket alokasiLoket (infotype1 j, address_studio stud, address cust);
+address_loket Locket (infotype1 j, address_studio stud, address cust);
 //address_studio sStudio (address_studio *first, infotype1 J);
-address Alokasi (infotype X);
+address Alokasi (infotype X/*, address_studio stud*/);
 address_film movie(infotype nama, infotype2 jam[3]);
 address_studio add_studio(address_studio first);
 void add_film(address_film *first, address_film *now);
@@ -75,7 +75,7 @@ void print_film(address_film current);
 void display_studio(address_studio head);
 int cekKosong (antrean q);
 void bikinQ(antrean *q);
-void insertCus(address* L, infotype X);
+void insertCus(address* L, infotype X/*, address_studio stud*/);
 void PrintA(antrean c);
 void PrintB(antrean b);
 void Insertlastcust (address* L, address H);
