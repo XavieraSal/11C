@@ -1,18 +1,22 @@
-#include "tubesheader.h"
+#include "xaviera.h"
+#include "arya.h"
 
 int main() {
-	infotype input
+	infotype input;
 	char ulang = 'y';
 	int cho, pil;
 	int i, n;
 	antrean q = {Nil, Nil};
 	antrean q2 = {Nil, Nil};
+	address_film head = Nil,
+				 now = Nil;
 
 	do {
 
-		printf("\n1.In\n");
-		printf("2.Print\n");
-		printf("3. Move node\n");
+		printf("[1] In\n");
+		printf("[2] Print\n");
+		printf("[3] Move Node\n");
+		printf("[4] Loket\n");
 		scanf("%d", &pil);
 
 		switch(pil) {
@@ -51,8 +55,9 @@ int main() {
 					printf("\napakah ingin memindahkan lagi?(y/t))\n");
 					ulang = getche();
 				} while (ulang== 'y' || ulang == 'Y');
-
 				break;
+			case 4 :
+				addPrintFilm(&head, &now);
 		}
 		printf("\nApkkh ingin menu?");
 		fflush(stdin);
