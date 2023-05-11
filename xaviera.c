@@ -14,8 +14,8 @@ void enqueue(antrean *q, infotype data) {
 		for ( i = 0; i < 10; i++);
 		{
 			new_node->cus_std[i] = (address_studio)malloc(sizeof(studio));
-			new_node->cus_std[i]->bwh_st = Nil;
-			new_node->cus_std[i]->studio = "";
+			new_node->cus_std[i]->next_fl = Nil;
+			new_node->cus_std[i]->studio = Nil;
 			new_node->cus_std[i]->next_st = Nil;
 		}
 	} else {
@@ -48,51 +48,54 @@ void PrintA(antrean c) {
 
 void moveNode(antrean *q1, antrean *q2, infotype data) {
 	address current = q1->head;
-	address prev = Nil;
+	address later = Nil;
 	while (current->next != Nil && current->nm_cus != data) {
-		prev = current;
+		later = current;
 		current = current->next;
 	}
+	//
 	if (current == Nil) {
 		printf("Node tidak ditemukan di dalam queue 1.\n");
 		return;
 	}
-	if (prev == Nil) {
+	//
+	if (later == Nil) { //pengecekkan jika q1 apakah merupakan node pertama atau bukan
 		q1->head = current->next;
 	} else {
-		prev->next = current->next;
+		later->next = current->next;
 	}
-	if (q1->tail == current) {
-		q1->tail = prev;
+	//
+	if (q1->tail == current) { //apakah node yang dipindahkan saat ini adalah node terakhir pada antrean q1
+		q1->tail = later;
 	}
 	current->next = Nil;
-	if (q2->tail == Nil) {
+	//
+	if (q2->tail == Nil) {//digunakan untuk memeriksa apakah q2 merupakan antrean kosong atau tidak. 
 		q2->head = current;
 		q2->tail = current;
 	} else {
-		q2->tail->next = current;
+		q2->tail->next = current; //tidak kosong
 		q2->tail = current;
 	}
-	printf("Node dengan data '%c' berhasil dipindahkan dari queue 1 ke queue 2.\n", data);
+	printf("Customer berhasil dipindahkan dari queue luar ke queue dalam\n");
 }
 
-void movetoLkt(antrean *q1, antrean *q2) {
-	if (q1->head == NULL) {
-		printf("Queue 1 kosong.\n");
-		return;
-	}
-	address nodeToMove = q1->head;
-	q1->head = q1->head->next;
-	if (q1->head == NULL) {
-		q1->tail = NULL;
-	}
-	nodeToMove->next = NULL;
-	if (q2->tail == NULL) {
-		q2->head = nodeToMove;
-		q2->tail = nodeToMove;
-	} else {
-		q2->tail->next = nodeToMove;
-		q2->tail = nodeToMove;
-	}
-	printf("Node dengan data '%c' berhasil dipindahkan dari queue 1 ke queue 2.\n", nodeToMove->nm_cus);
+void moveToLoket(antrean *antreanQ, antrean *loketQ) {
+    if (loketQ->head == NULL) {
+        if (antreanQ->head != NULL) {
+            address nodeToMove = antreanQ->head;
+            antreanQ->head = nodeToMove->next;
+            if (antreanQ->head == NULL) {
+                antreanQ->tail = NULL;
+            }
+            nodeToMove->next = NULL;
+            loketQ->head = nodeToMove;
+            loketQ->tail = nodeToMove;
+            printf("Node pertama berhasil dipindahkan ke queue loket.\n");
+        } else {
+            printf("Queue antrean kosong\n");
+        }
+    } else {
+        printf("Queue loket sudah terisi\n");
+    }
 }

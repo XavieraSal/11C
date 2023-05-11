@@ -24,10 +24,11 @@ address_loket alokasiLoket (infotype1 j, address_studio stud, address cust) {
 
 address_loket Locket (infotype1 j, address_studio stud, address cust) {
 	address_loket L, R;
+	int i;
 	L = alokasiLoket(j, stud, cust);
 	R = L;
 	if (R != Nil) {
-		for (int i = 1; i < 3; i++) {
+		for (i = 1; i < 3; i++) {
 			R->next_loket = alokasiLoket(j+i, stud, cust);
 			R = R->next_loket;
 		}
@@ -38,10 +39,11 @@ address_loket Locket (infotype1 j, address_studio stud, address cust) {
 
 address_film movie(infotype nama, infotype2 jam[3]) {
 	address_film f;
+	int i;
 	f = (address_film)malloc(sizeof(Film));
 	if (f != Nil) {
 		f->nm_film = nama;
-		for (int i = 0; i < 3; i++) {
+		for (i = 0; i < 3; i++) {
 			f->jm_tyg[i] = jam[i];
 		}
 		f->bwh_se = Nil;
@@ -97,6 +99,7 @@ void print_film(address_film current) {
 	printf("\t\t\t\xB3%12s\xB3%24s\xB3%24s\xB3%12s\xB3\n", "   Studio   ", "     Nama Film      ", "Jam         ", "   Harga   ");
 	printf("\t\t\t\xC3\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC5\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC5\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC5\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xB4\n");
 	int i = 1;
+	int j;
 	address_studio first = Nil;
 	if (first == Nil) {
 		for (i = 1; i <= 1; i++) {
@@ -105,7 +108,7 @@ void print_film(address_film current) {
 	}
 	while (current != Nil) {
 		printf("\t\t\t\xB3%12d\xB3%24s\xB3", first->studio, current->nm_film);
-		for (int j = 0; j < 3; j++) {
+		for ( j = 0; j < 3; j++) {
 			printf("%-8.2f", current->jm_tyg[j]);
 		}
 		first = first->next_st;
@@ -120,4 +123,140 @@ void addPrintFilm(address_film *head, address_film *now) {
 		add_film(head, now);
 	}
 	print_film(*head);
+}
+
+/*Membuat status awal kursi "Belum dipesan"*/
+address_Seat create_seats() {
+    int i;
+    address_Seat head = NULL;
+    address_Seat tampung;
+
+    for(i=MAX_SEATS; i>=1; i--) {
+        tampung = (address_Seat)malloc(sizeof(Seat));
+        tampung->seat_number = i;
+        tampung->is_booked = 0;
+        tampung->next_seat = head;
+        head = tampung;
+    }
+
+    return head;
+}
+
+/*Vico*/
+/*Menampilkan jumlah kursi yang masih tersedia*/
+void display_seats(address_Seat head) {
+    address_Seat tampung = head;
+
+    while(tampung != NULL) {
+        if(tampung->is_booked) {
+            printf("X ");
+        } else {
+            printf("%d ", tampung->seat_number);
+        }
+        tampung = tampung->next_seat;
+    }
+
+    printf("\n");
+}
+
+/*Memesan kursi*/
+void book_seat(address_Seat head, int num_seats, SeatHistory **history_head) {
+    address_Seat tampung = head;
+    int hitung = 0;
+    int total_price = 0;
+
+    while(tampung != NULL && hitung < num_seats) {
+        if(!tampung->is_booked) {
+            tampung->is_booked = 1;
+            hitung++;
+            total_price += SEAT_PRICE;
+
+            // Simpan riwayat pembelian kursi
+            SeatHistory *new_history = (SeatHistory *)malloc(sizeof(SeatHistory));
+            new_history->seat_number = tampung->seat_number;
+            new_history->price = SEAT_PRICE;
+            new_history->next_history = *history_head;
+            *history_head = new_history;
+        }
+        tampung = tampung->next_seat;
+    }
+
+    printf("\nTotal harga: Rp %d\n", total_price);
+}
+
+/*Memesan kursi yang dapat diatur sebanyak yang diinginkan*/
+void book_seats(address_Seat head, SeatHistory **history_head) {
+    int jumlah, nomor_kursi, i;
+	address_Seat tampung;
+	
+    printf("\nBanyaknya kursi : ");
+    scanf("%d", &jumlah);
+
+    if(jumlah > 0 && jumlah <= 25) {
+        printf("Masukan nomor kursi yang ingin di ambil (Gunakan spasi jika lebih dari 1 ): ");
+
+        for( i = 0; i < jumlah; i++) {
+            scanf("%d", &nomor_kursi);
+
+            if(nomor_kursi < 1 || nomor_kursi > 25) {
+                printf("Invalid seat number. Please try again.\n");
+                break;
+        } else if(head == NULL) {
+            printf("The cinema has not been set up yet.\n");
+            break;
+        } else {
+            tampung = head;
+
+            while(tampung != NULL) {
+                if(tampung->seat_number == nomor_kursi) {
+                    if(tampung->is_booked) {
+                        printf("Seat number %d is already booked.\n", nomor_kursi);
+                        break;
+                    } else {
+                        tampung->is_booked = 1;
+
+                        // Simpan riwayat pembelian kursi
+                        SeatHistory *new_history = (SeatHistory *)malloc(sizeof(SeatHistory));
+                        new_history->seat_number = tampung->seat_number;
+                        new_history->price = SEAT_PRICE;
+                        new_history->next_history = *history_head;
+                        *history_head = new_history;
+
+                        printf("Seat number %d has been booked.\n", nomor_kursi);
+                        break;
+                    }
+                }
+                tampung = tampung->next_seat;
+            }
+
+            if(tampung == NULL) {
+                printf("Invalid seat number. Please try again.\n");
+            }
+        }
+    }
+}
+}
+
+/*Menghapus riwayat pembelian kursi*/
+void clear_history(SeatHistory **history_head) {
+    SeatHistory *current_history = *history_head;
+    SeatHistory *next_history;
+
+    while(current_history != NULL) {
+        next_history = current_history->next_history;
+        free(current_history);
+        current_history = next_history;
+    }
+
+    *history_head = NULL;
+}
+
+/*Menampilkan riwayat pembelian kursi*/
+void display_history(SeatHistory *history_head) {
+    SeatHistory *current_history = history_head;
+
+    while(current_history != NULL) {
+        printf("Seat number %d, Rp %d\n", current_history->seat_number, current_history->price);
+        current_history = current_history->next_history;
+    }
 }

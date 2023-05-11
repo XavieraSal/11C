@@ -10,14 +10,25 @@
 
 #define Nil NULL
 
+#define MAX_SEATS 25 //Mendefinisikan konstanta dengan nilai 25 untuk kursi bioskop
+#define SEAT_PRICE 25000 //Mendefinisikan konstanta dengan nilai 25000 untuk harga kursi
+
+
+//typedef struct seat *address_Seat;
+//typedef struct seat {
+//	infotype info_seat;
+//	address_Seat next_seat;
+//} Seat;
 typedef const char* infotype;
 typedef int infotype1;
 typedef float infotype2;
 
+/*Vico*/
 typedef struct seat *address_Seat;
 typedef struct seat {
-	infotype info_seat;
-	address_Seat next_seat;
+    int seat_number;
+    int is_booked;
+    address_Seat next_seat;
 } Seat;
 
 typedef struct film *address_film;
@@ -59,7 +70,27 @@ typedef struct lkt {
 	address lkt_cus;
 } Loket;
 
+/*Vico*/
+typedef struct seat_history {
+    int seat_number;
+    int price;
+    struct seat_history *next_history;
+} SeatHistory;
 
+
+/*Xavi*/
+typedef struct node {
+	int data;
+	struct node *next;
+} node;
+
+/*Xavi*/
+void enqueue(antrean *q, infotype data);
+void PrintA(antrean c);
+void moveNode(antrean *q1, antrean *q2, infotype data);
+void moveToLoket(antrean *antreanQ, antrean *loketQ);
+
+/*Arya*/
 address_studio sStudio (infotype1 j, address_film mov);
 address_loket alokasiLoket (infotype1 j, address_studio stud, address cust);
 address_loket Locket (infotype1 j, address_studio stud, address cust);
@@ -68,4 +99,12 @@ address_studio add_studio(address_studio first);
 void add_film(address_film *first, address_film *now);
 void addPrintFilm(address_film *head, address_film *now);
 void print_film(address_film current);
+
+/*Vico*/
+address_Seat create_seats();
+void display_seats(address_Seat head);
+void book_seat(address_Seat head, int num_seats, SeatHistory **history_head);
+void book_seats(address_Seat head, SeatHistory **history_head);
+void clear_history(SeatHistory **history_head);
+void display_history(SeatHistory *history_head);
 #endif
