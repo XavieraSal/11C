@@ -2,18 +2,20 @@
 #include "arya.h"
 
 int main() {
+	address_studio sTemp, s;
+	address_loket Loket = Nil;
+	address_film now = Nil,
+				 head = Nil;
+    address_Seat depan = Nil;
+	antrean q = {Nil, Nil};
+	antrean q2 = {Nil, Nil};
 	infotype input;
 	char ulang = 'y';
 	int cho, pil;
 	int i, n;
-	antrean q = {Nil, Nil};
-	antrean q2 = {Nil, Nil};
-	address_film head = Nil,
-	now = Nil;
     int num_seats;
     int seat_num;
-    address_Seat depan = NULL;
-    SeatHistory *history_head = NULL;
+    SeatHistory *history_head = Nil;
 
 
 do {
@@ -54,7 +56,16 @@ do {
 				break;
 			case 3 :
 				system("cls");
-				addPrintFilm(&head, &now);
+				addPrintFilm(&head, &now, &s);
+				sTemp = s;
+				for (i = 1; i <= 2; i++) {
+					if  (Loket == Nil) {
+						Loket = Loket(i, sTemp, c);
+					} else {
+						Loket->next_loket = Locket(i, sTemp, c);
+					}
+					sTemp = sTemp->next_st;
+				}
 				
 					do {
 						printf("1. Buat kursi\n");
