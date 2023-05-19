@@ -24,15 +24,18 @@ address_loket alokasiLoket (infotype1 j, address_studio stud, address cust) {
 
 address_loket Locket (infotype1 j, address_studio stud, address cust) {
 	address_loket L, R;
-	int i;
-	L = alokasiLoket(j, stud, cust);
-	R = L;
+//	L = alokasiLoket(j, stud, cust);
+//	int i;
+//	L->loket = 1;
+//	R = L;
 	if (R != Nil) {
-		for (i = 1; i < 3; i++) {
-			R->next_loket = alokasiLoket(j+i, stud, cust);
-			R = R->next_loket;
-		}
-		R->next_loket = L;
+//		for (i = 1; i < 3; i++) {
+		R/*->next_loket*/ = alokasiLoket(j, stud, cust);
+//			R->loket = i;
+//		printf("%d ", R->bwh_studio->studio);
+//			R = R->next_loket;
+//		}
+//		R->next_loket = L;
 	}
 	return R;
 }
@@ -74,6 +77,17 @@ address_studio add_studio(address_studio first) {
 	return first;
 }
 
+address_studio add_studio2(address_studio pirst) {
+	pirst = Nil;
+	int i;
+	if(pirst == NULL) {
+		for(i = 1; i <= 1; i++) {
+			pirst = add_studio(pirst);
+//			(*first)->studio = i;
+		}
+	}
+	return pirst;
+}
 
 void add_film(address_film *first, address_film *now) {
 	infotype nama_film[] = {"The Batman", "Dune", "Barbie"};
@@ -94,35 +108,31 @@ void add_film(address_film *first, address_film *now) {
 	}
 }
 
-void print_film(address_film current) {
+void print_film(address_film current, address_studio *pirst) {
 	printf("\t\t\t\xDA\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC2\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC2\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC2\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xBF\n");
 	printf("\t\t\t\xB3%12s\xB3%24s\xB3%24s\xB3%12s\xB3\n", "   Studio   ", "     Nama Film      ", "Jam         ", "   Harga   ");
 	printf("\t\t\t\xC3\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC5\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC5\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC5\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xB4\n");
-	int i = 1;
-	int j;
-	address_studio first = Nil;
-	if (first == Nil) {
-		for (i = 1; i <= 1; i++) {
-			first = add_studio(first);
-		}
-	}
+	int i, j;
+	address_studio first;
+	*pirst = add_studio2(*pirst);
+	first = *pirst;
 	while (current != Nil) {
 		printf("\t\t\t\xB3%12d\xB3%24s\xB3", first->studio, current->nm_film);
-		for ( j = 0; j < 3; j++) {
+		for (int j = 0; j < 3; j++) {
 			printf("%-8.2f", current->jm_tyg[j]);
 		}
-		first = first->next_st;
+		first = (first)->next_st;
 		current = current->next_fl;
-		printf("\xB3%12s\xB3\n", "  45.000   ");
+		printf("\xB3%12s\xB3\n", "  25.000   ");
 	}
 	printf("\t\t\t\xC0\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC1\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC1\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC1\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xD9\n");
 }
 
-void addPrintFilm(address_film *head, address_film *now) {
+void addPrintFilm(address_film *head, address_film *now, address_studio *first) {
 	if (*head == Nil) {
 		add_film(head, now);
 	}
-	print_film(*head);
+	print_film(*head, first);
 }
 
 /*Membuat status awal kursi "Belum dipesan"*/

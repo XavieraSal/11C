@@ -96,9 +96,10 @@ address_loket alokasiLoket (infotype1 j, address_studio stud, address cust);
 address_loket Locket (infotype1 j, address_studio stud, address cust);
 address_film movie(infotype nama, infotype2 jam[3]);
 address_studio add_studio(address_studio first);
+address_studio add_studio2(address_studio pirst);
 void add_film(address_film *first, address_film *now);
-void addPrintFilm(address_film *head, address_film *now);
-void print_film(address_film current);
+void addPrintFilm(address_film *head, address_film *now, address_studio *first);
+void print_film(address_film current, address_studio *pirst);
 
 /*Vico*/
 address_Seat create_seats();
