@@ -16,7 +16,10 @@ address_loket alokasiLoket (infotype1 j, address_studio stud, address cust) {
 	if (L != Nil) {
 		L->bwh_studio = stud;
 		L->loket = j;
-		L->lkt_cus = cust;
+		while (cust->next != Nil){
+			cust = cust->next;
+		}
+		L->lkt_cus = cust->next;
 		L->next_loket = Nil;
 	}
 	return L;
@@ -151,6 +154,7 @@ address_Seat create_seats() {
 
     return head;
 }
+
 
 /*Vico*/
 /*Menampilkan jumlah kursi yang masih tersedia*/
