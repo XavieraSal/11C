@@ -2,6 +2,7 @@
 #include "arya.h"
 
 int main() {
+	address c;
 	address_studio sTemp, s;
 	address_loket Loket = Nil;
 	address_film now = Nil,
@@ -60,7 +61,7 @@ do {
 				sTemp = s;
 				for (i = 1; i <= 2; i++) {
 					if  (Loket == Nil) {
-						Loket = Loket(i, sTemp, c);
+						Loket = Locket(i, sTemp, c);
 					} else {
 						Loket->next_loket = Locket(i, sTemp, c);
 					}
