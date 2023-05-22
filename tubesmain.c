@@ -4,13 +4,13 @@
 int main() {
 	warna();
 	address c,
-			plgn1,
-			plgn2,
-			bukti;
+	        plgn1,
+	        plgn2,
+	        bukti;
 	address_studio sTemp,
-				   s;
+	               s;
 	address_loket Loket = Nil,
-				  Lkt;
+	              Lkt;
 	address_film now = Nil,
 	             head = Nil;
 	address_Seat depan = Nil;
@@ -19,12 +19,12 @@ int main() {
 	infotype input;
 	char ulang = 'y';
 	int cho,
-		pil,
-		validInput,
-		i,
-		n,
-		num_seats,
-		seat_num;
+	    pil,
+	    validInput,
+	    i,
+	    n,
+	    num_seats,
+	    seat_num;
 	SeatHistory *history_head = Nil;
 
 
@@ -35,32 +35,37 @@ int main() {
 		printf("Customer yang mengantre:\n");
 		PrintA(q2);
 
-		//print lkt1
-		//print lkt2
-
-		printf("\n[1] Input Customer\n");
-		printf("[2] Pindahkan Customer ke antrean\n");
-		printf("[3] Loket\n");
+		printf("\n\t\t\t\t\xDA\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xBF\n");
+		printf("\t\t\t\t\xB3            Pembelian Tiket Film           \xB3\n");
+		printf("\t\t\t\t\xC3\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xB4\n");
+		printf("\t\t\t\t\xB3 [1] Input Customer                        \xB3\n");
+		printf("\t\t\t\t\xB3 [2] Pindahkan Customer ke antrean         \xB3\n");
+		printf("\t\t\t\t\xB3 [3] Loket                                 \xB3\n");
+//	printf("\t\t\t\t\xB3 [4] Exit                                  \xB3\n");
+		printf("\t\t\t\t\xC0\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xD9\n");
+		printf("\t\t\tInput : ");
 		scanf("%d", &pil);
 
 		switch(pil) {
 
 			case 1:
+//				printf("%d", Loket->loket);
 				validInput = 0;
 				while (!validInput) {
-					printf("\nAda berapa customer di bioskop?\t");
+					printf("\n\t\t\t\t\tAda berapa customer di bioskop?\t");
 					// Meminta input pengguna hingga angka yang valid dimasukkan
-					if (scanf("%d", &n) == 1) {
+					if (scanf("\n%d", &n) == 1) {
 						validInput = 1;
 						for (i = 1; i <= n; i++) {
-							printf("\nMasukkan namanya: ");
+							printf("\n\t\t\t\t\tMasukkan namanya: ");
 							fflush(stdin);
 							scanf("%s", &input);
 							enqueue(&q, input, s);
 						}
 					} else {
-						printf("Input tidak valid. Mohon masukkan angka.\n");
+						printf("\t\t\t\t     Input tidak valid. Mohon masukkan angka.\n");
 						// Membersihkan input buffer
+//						system("cls");
 						while (getchar() != '\n');
 					}
 				}
