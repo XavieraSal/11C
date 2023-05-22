@@ -2,6 +2,7 @@
 #include "arya.h"
 
 int main() {
+	warna();
 	address c, plgn1, plgn2, bukti;
 	address_studio sTemp, s;
 	address_loket Loket = Nil, Lkt;
@@ -43,7 +44,7 @@ int main() {
 					printf("\nMasukkan namanya: ");
 					fflush(stdin);
 					scanf("%s", &input);
-					enqueue(&q, input);
+					enqueue(&q, input,s);
 				}
 				break;
 
@@ -67,55 +68,111 @@ int main() {
 				addPrintFilm(&head, &now, &s);
 				sTemp = s;
 				printf("\nStudio");
-				plgn1 = q2.head;
-				printf("\nPelanggan 1 (Loket 2's head)");
-				plgn2 = plgn1->next;
-				printf("\nPelanggan 2");
-				while (plgn1 != Nil && plgn2 != Nil) {
-//					if(plgn1 != Nil){
-					plgn1->next = plgn2->next;
-					plgn1 = plgn1->next;
-					printf("\nBelakang antrian genap pindah ke ganjil DONE");
+				
+				address_loket Loket_1 = Locket(1, sTemp, q2.head);
+				address_loket Loket_2 = Locket(2, sTemp, q2.head);
+				
+				printf("\n ini kondisi q2:\n");
+				PrintA(q2);
+				NodeToEmptyLoket(&q2.head, Loket_1, Loket_2);
+				printf("\n ini kondisi q2 setelah move node utk lkt:\n");
+				PrintA(q2);
+				printf("ini print loket\n");
+				PrintIsiDuaLoket(Loket_1, Loket_2);
+				
+				//alokasi loket
+//				address_loket Loket_1 = Locket(1, sTemp, q.head);
+//				address_loket Loket_2 = Locket(2, sTemp, q.head);
+//		
+//				printf("\n ini kondisi q2:\n");
+//				PrintA(q2);
+//				NodeToEmptyLoket(&q2.head, Loket_1, Loket_2);
+//				printf("\n ini kondisi q2 setelah move node utk lkt1:\n");
+//				PrintA(q2);
+
+
+
+			//	moveNodeToEmptyLoket(&q2.head, Loket_1, Loket_2);
+			//	printf("\n ini kondisi q2 setelah move node utk lkt2:\n");
+				//PrintA(q2);
+				
+				//PrintIsiDuaLoket(Loket_1, Loket_2);
+				
+//				printf("Loket 1 :");
+//				plgn1 = Loket_1->lkt_cus;
+//				while(plgn1 != Nil){
+//				printf("%s", plgn1->nm_cus);
+//				plgn1 = plgn1->next;
+//				}
+//				plgn2 = Loket_2->lkt_cus;
+//				while(plgn2 != Nil){
+//				printf("%s", plgn2->nm_cus);
+//				plgn2 = plgn2->next;
+//				}
+				
+				
+//				plgn1 = q2.head;
+//				printf("\nPelanggan 1 (Loket 2's head)");
+//				plgn2 = plgn1->next;
+//				printf("\nPelanggan 2");
+//				while (plgn1 != Nil && plgn2 != Nil) {
+////					if(plgn1 != Nil){
+//					plgn1->next = plgn2->next;
+//					plgn1 = plgn1->next;
+//					printf("\nBelakang antrian genap pindah ke ganjil DONE");
+////					}
+////					else{
+//					plgn2->next = plgn1->next;
+//					plgn2 = plgn2->next;
+//					printf("\nBelakang antrian ganjil pindah ke genap DONE");
+////					}
+//					printf("\nPelanggan not NULL DONE");
+//				}
+//				plgn1 = q2.head;
+////				printf("\n%s", plgn1->nm_cus);
+//				printf("\nPelanggan 1 (Loket 2's head)");
+//				plgn2 = plgn1->next;
+//				printf("\nPelanggan 2");
+//				while (plgn1 != Nil) {
+//					printf("\nPrint Nama Customer PLGN1 START");
+////					printf("%s", plgn1->nm_cus); // segmentation fault
+//					printf("\nPrint Nama Customer PLGN1 DONE");
+//					plgn1 = plgn1->next;
+//					printf("\nBelakang antrian genap pindah ke ganjil DONE");
+//				}
+//				while (plgn2 != Nil) {
+//					printf("\nPrint Nama Customer PLGN2 START");
+////					printf("%s", plgn2->nm_cus); //segmentation fault
+//					printf("\nPrint Nama Customer PLGN2 DONE");
+//					plgn2 = plgn2->next;
+//					printf("\nBelakang antrian ganjil pindah ke genap DONE");
+//				}
+//				printf("\nPrint nama pelanggan DONE");
+//				Lkt = Loket;
+//				for (i = 1; i <= 2; i++) {
+////				do {
+//					if  (Lkt == Nil) {
+//						printf("\nLkt checked as NULL DONE");
+//						Lkt = Locket(i, sTemp, plgn1); // segmentation fault
+//						printf("\nLkt assigned with Locket() DONE");
+////						o = 1;
+////						plgn1 = plgn2->next;
+////						Lkt = Lkt->next_loket;
+//					} else {
+//						printf("\nLkt checked as NOT NULL DONE");
+//						Lkt->next_loket = Locket(i, sTemp, plgn2); // segmentation fault
+//						printf("\nLkt->next assigned with Locket() DONE");
+////						o = 0;
+////						plgn2 = plgn1->next;
+////						Lkt = Loket;
 //					}
-//					else{
-					plgn2->next = plgn1->next;
-					plgn2 = plgn2->next;
-					printf("\nBelakang antrian ganjil pindah ke genap DONE");
-//					}
-					printf("\nPelanggan not NULL DONE");
-				}
-				plgn1 = q2.head;
-				plgn2 = plgn1->next;
-				while (plgn1 != Nil) {
-					printf("%s", plgn1->nm_cus);
-					plgn1 = plgn1->next;
-				}
-				while (plgn2 != Nil) {
-					printf("%s", plgn2->nm_cus);
-					plgn2 = plgn2->next;
-				}
-				printf("\nPrint nama pelanggan DONE");
-				Lkt = Loket;
-				for (i = 1; i <= 2; i++) {
-//				do {
-					if  (Lkt == Nil) {
-						Lkt = Locket(i, sTemp, plgn1);
-//						o = 1;
-//						plgn1 = plgn2->next;
-//						Lkt = Lkt->next_loket;
-					} else {
-						Lkt->next_loket = Locket(i, sTemp, plgn2);
-//						o = 0;
-//						plgn2 = plgn1->next;
-//						Lkt = Loket;
-					}
-				}
-//				} while (plgn1 != Nil && plgn2 != Nil);
-				sTemp = sTemp->next_st; //alokasi loket
-				bukti = Loket->lkt_cus;
-				while(bukti != Nil) {
-					printf("%s", bukti->nm_cus);
-				}
+//				}
+////				} while (plgn1 != Nil && plgn2 != Nil);
+//				sTemp = sTemp->next_st; //alokasi loket
+//				bukti = Loket->lkt_cus;
+//				while(bukti != Nil) {
+//					printf("%s", bukti->nm_cus);
+//				}
 
 				do {
 					printf("1. Buat kursi\n");
