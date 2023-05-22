@@ -1,5 +1,11 @@
 #include "arya.h"
 
+int cekKosong (antrean q) {
+	int k;
+	k = q.head == Nil && q.tail == Nil;
+	return k;
+}
+
 address_studio sStudio (infotype1 j, address_film mov) {
 	address_studio A = (address_studio)malloc(sizeof(studio));
 	if (A != Nil) {

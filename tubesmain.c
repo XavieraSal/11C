@@ -3,9 +3,14 @@
 
 int main() {
 	warna();
-	address c, plgn1, plgn2, bukti;
-	address_studio sTemp, s;
-	address_loket Loket = Nil, Lkt;
+	address c,
+			plgn1,
+			plgn2,
+			bukti;
+	address_studio sTemp,
+				   s;
+	address_loket Loket = Nil,
+				  Lkt;
 	address_film now = Nil,
 	             head = Nil;
 	address_Seat depan = Nil;
@@ -13,10 +18,13 @@ int main() {
 	antrean q2 = {Nil, Nil};
 	infotype input;
 	char ulang = 'y';
-	int cho, pil;
-	int i, n;
-	int num_seats;
-	int seat_num;
+	int cho,
+		pil,
+		validInput,
+		i,
+		n,
+		num_seats,
+		seat_num;
 	SeatHistory *history_head = Nil;
 
 
@@ -38,29 +46,37 @@ int main() {
 		switch(pil) {
 
 			case 1:
-				printf("\nAda berapa customer di bioskop?\t");
-				scanf("%d", &n);
-				for ( i = 1; i <= n; i++) {
-					printf("\nMasukkan namanya: ");
-					fflush(stdin);
-					scanf("%s", &input);
-					enqueue(&q, input,s);
+				validInput = 0;
+				while (!validInput) {
+					printf("\nAda berapa customer di bioskop?\t");
+					// Meminta input pengguna hingga angka yang valid dimasukkan
+					if (scanf("%d", &n) == 1) {
+						validInput = 1;
+						for (i = 1; i <= n; i++) {
+							printf("\nMasukkan namanya: ");
+							fflush(stdin);
+							scanf("%s", &input);
+							enqueue(&q, input, s);
+						}
+					} else {
+						printf("Input tidak valid. Mohon masukkan angka.\n");
+						// Membersihkan input buffer
+						while (getchar() != '\n');
+					}
 				}
 				break;
-
 			case 2:
-				do {
-					printf("\nSiapa yang mau mengantre untuk nonton film?\n");
-					fflush(stdin);
-					scanf("%s", &input);
-					//printf("\nini movenode\n");
-					moveNode(&q, &q2, input);
-					printf("\nApakah ada yang ingin mengantre lagi?(y/t))\n");
-					ulang = getche();
-				} while (ulang== 'y' || ulang == 'Y');
-
-				//node pertama masuk ke loket
-
+				if (!cekKosong(q)) {
+					do {
+						printf("\nSiapa yang mau mengantre untuk nonton film?\n");
+						fflush(stdin);
+						scanf("%s", &input);
+						moveNode(&q, &q2, input);
+						printf("\nApakah ada yang ingin mengantre lagi?(y/t))\n");
+						ulang = getche();
+					} while (ulang == 'y' || ulang == 'Y');
+				}
+				printf("Belum ada customer di dalam bioskop\n");
 				break;
 			case 3 :
 				system("cls");
@@ -68,10 +84,10 @@ int main() {
 				addPrintFilm(&head, &now, &s);
 				sTemp = s;
 				printf("\nStudio");
-				
+
 				address_loket Loket_1 = Locket(1, sTemp, q2.head);
 				address_loket Loket_2 = Locket(2, sTemp, q2.head);
-				
+
 				printf("\n ini kondisi q2:\n");
 				PrintA(q2);
 				NodeToEmptyLoket(&q2.head, Loket_1, Loket_2);
@@ -79,11 +95,11 @@ int main() {
 				PrintA(q2);
 				printf("ini print loket\n");
 				PrintIsiDuaLoket(Loket_1, Loket_2);
-				
+
 				//alokasi loket
 //				address_loket Loket_1 = Locket(1, sTemp, q.head);
 //				address_loket Loket_2 = Locket(2, sTemp, q.head);
-//		
+//
 //				printf("\n ini kondisi q2:\n");
 //				PrintA(q2);
 //				NodeToEmptyLoket(&q2.head, Loket_1, Loket_2);
@@ -92,12 +108,12 @@ int main() {
 
 
 
-			//	moveNodeToEmptyLoket(&q2.head, Loket_1, Loket_2);
-			//	printf("\n ini kondisi q2 setelah move node utk lkt2:\n");
+				//	moveNodeToEmptyLoket(&q2.head, Loket_1, Loket_2);
+				//	printf("\n ini kondisi q2 setelah move node utk lkt2:\n");
 				//PrintA(q2);
-				
+
 				//PrintIsiDuaLoket(Loket_1, Loket_2);
-				
+
 //				printf("Loket 1 :");
 //				plgn1 = Loket_1->lkt_cus;
 //				while(plgn1 != Nil){
@@ -109,8 +125,8 @@ int main() {
 //				printf("%s", plgn2->nm_cus);
 //				plgn2 = plgn2->next;
 //				}
-				
-				
+
+
 //				plgn1 = q2.head;
 //				printf("\nPelanggan 1 (Loket 2's head)");
 //				plgn2 = plgn1->next;

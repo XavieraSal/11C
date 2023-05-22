@@ -6,7 +6,6 @@
 #include <conio.h>
 #include <unistd.h>
 #include <windows.h>
-#include <wincon.h>
 #include "xaviera.h"
 
 #define Nil NULL
@@ -80,25 +79,19 @@ typedef struct seat_history {
 
 
 /*Xavi*/
-//typedef struct node {
-//	int data;
-//	struct node *next;
-//} node;
+typedef struct node {
+	int data;
+	struct node *next;
+} node;
 
 /*Xavi*/
-//void enqueue(antrean *q, infotype data);
 void enqueue(antrean *q, infotype data, address_studio st);
 void PrintA(antrean c);
 void moveNode(antrean *q1, antrean *q2, infotype data);
-//void moveToLoket(antrean *antreanQ, antrean *loketQ);
-void NodeToEmptyLoket(address *q, address_loket loket1, address_loket loket2);
-void PrintIsiLoket(address_loket loket);
-void PrintIsiDuaLoket(address_loket loket1, address_loket loket2);
-int getScreenWidth();
-int getScreenHeight();
-void warna();
+void moveToLoket(antrean *antreanQ, antrean *loketQ);
 
 /*Arya*/
+int cekKosong (antrean q);
 address_studio sStudio (infotype1 j, address_film mov);
 address_loket alokasiLoket (infotype1 j, address_studio stud, address cust);
 address_loket Locket (infotype1 j, address_studio stud, address cust);
