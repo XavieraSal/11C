@@ -6,3 +6,5 @@ Kelompok C 11
 Xaviera Sadiya Salsabeel-221511032
 Aryagara Kristandy Rukmana Putra-221511002
 Vico Triansyah Nasril-221511031
+
+nama project untuk dijalankan: cinema DEV-C++ Project File
