@@ -113,25 +113,25 @@ void moveNode(antrean *q1, antrean *q2, infotype data) {
         later = current;
         current = current->next;
     }
-
+	//
     if (current == Nil) {
-        printf("Customer tidak ditemukan di dalam daerah yang berkeliaran \n");
+        printf("Customer tidak ditemukan di queue luar yang berkeliaran \n");
         return;
     }
-
-    if (later == Nil) {
+	//
+    if (later == Nil) { //pengecekkan jika q1 apakah merupakan node pertama atau bukan
         q1->head = current->next;
     } else {
         later->next = current->next;
     }
-
-    if (q1->tail == current) {
+	//
+    if (q1->tail == current) { //apakah node yang dipindahkan saat ini adalah node terakhir pada antrean q1
         q1->tail = later;
     }
-
+	//
     current->next = Nil;
 
-    if (q2->tail == Nil) {
+    if (q2->tail == Nil) { //digunakan untuk memeriksa apakah q2 merupakan antrean kosong atau tidak. 
         q2->head = current;
         q2->tail = current;
     } else {
@@ -143,43 +143,43 @@ void moveNode(antrean *q1, antrean *q2, infotype data) {
 }
 
 
-// void moveNodeToEmptyLoket(antrean *q, address_loket loket1, address_loket loket2) {
-//    if (loket1->lkt_cus == Nil) { // Check if loket1 is empty
-//        if (q->head != Nil) {
-//            loket1->lkt_cus = q->head; // Move the node from the queue to loket1
-//            q->head = q->head->next; // Update the queue's head
-//            if (q->head == Nil) {
-//                q->tail = Nil; // If the queue becomes empty, update the tail as well
-//            }
-//            loket1->lkt_cus->next = Nil; // Set the next pointer of the moved node to Nil
-//
-//            // Reset the cus_std array in the moved node
-//            for (int i = 0; i < 10; i++) {
-//                loket1->lkt_cus->cus_std[i] = Nil;
-//            }
-//            return;
-//        }
-//    }
-//
-//    if (loket2->lkt_cus == Nil) { // Check if loket2 is empty
-//        if (q->head != Nil) {
-//            loket2->lkt_cus = q->head; // Move the node from the queue to loket2
-//            q->head = q->head->next; // Update the queue's head
-//            if (q->head == Nil) {
-//                q->tail = Nil; // If the queue becomes empty, update the tail as well
-//            }
-//            loket2->lkt_cus->next = Nil; // Set the next pointer of the moved node to Nil
-//
-//            // Reset the cus_std array in the moved node
-//            for (int i = 0; i < 10; i++) {
-//                loket2->lkt_cus->cus_std[i] = Nil;
-//            }
-//            return;
-//        }
-//    }
-//}
-//
-//ubah modul di atas agar parameter yang digunakan bukanlah antrean, tetapi address dan juga ada kondisi ketika q->head Nil
+ void moveNodeToEmptyLoket(antrean *q, address_loket loket1, address_loket loket2) {
+    if (loket1->lkt_cus == Nil) { // Check if loket1 is empty
+        if (q->head != Nil) {
+            loket1->lkt_cus = q->head; // Move the node from the queue to loket1
+            q->head = q->head->next; // Update the queue's head
+            if (q->head == Nil) {
+                q->tail = Nil; // If the queue becomes empty, update the tail as well
+            }
+            loket1->lkt_cus->next = Nil; // Set the next pointer of the moved node to Nil
+
+            // Reset the cus_std array in the moved node
+            for (int i = 0; i < 10; i++) {
+                loket1->lkt_cus->cus_std[i] = Nil;
+            }
+            return;
+        }
+    }
+
+    if (loket2->lkt_cus == Nil) { // Check if loket2 is empty
+        if (q->head != Nil) {
+            loket2->lkt_cus = q->head; // Move the node from the queue to loket2
+            q->head = q->head->next; // Update the queue's head
+            if (q->head == Nil) {
+                q->tail = Nil; // If the queue becomes empty, update the tail as well
+            }
+            loket2->lkt_cus->next = Nil; // Set the next pointer of the moved node to Nil
+
+            // Reset the cus_std array in the moved node
+            for (int i = 0; i < 10; i++) {
+                loket2->lkt_cus->cus_std[i] = Nil;
+            }
+            return;
+        }
+    }
+}
+
+//ubah modul agar parameter yang digunakan bukanlah antrean, tetapi address dan juga ada kondisi ketika q->head Nil
 
 //void moveNodeToEmptyLoket(address *q, address_loket loket1, address_loket loket2) {
 //    if (loket1->lkt_cus == Nil) { // Check if loket1 is empty

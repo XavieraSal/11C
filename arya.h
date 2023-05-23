@@ -12,7 +12,8 @@
 
 #define MAX_SEATS 25 //Mendefinisikan konstanta dengan nilai 25 untuk kursi bioskop
 #define SEAT_PRICE 25000 //Mendefinisikan konstanta dengan nilai 25000 untuk harga kursi
-
+#define JUMLAH_FILM 3
+#define JUMLAH_KURSI_PER_FILM 25
 
 //typedef struct seat *address_Seat;
 //typedef struct seat {
@@ -89,6 +90,12 @@ void enqueue(antrean *q, infotype data, address_studio st);
 void PrintA(antrean c);
 void moveNode(antrean *q1, antrean *q2, infotype data);
 void moveToLoket(antrean *antreanQ, antrean *loketQ);
+void moveNodeToEmptyLoket(antrean *q, address_loket loket1, address_loket loket2);
+void PrintIsiLoket(address_loket loket);
+void PrintIsiDuaLoket(address_loket loket1, address_loket loket2);
+int getScreenWidth();
+int getScreenHeight();
+void warna();
 
 /*Arya*/
 int cekKosong (antrean q);
@@ -109,4 +116,6 @@ void book_seat(address_Seat head, int num_seats, SeatHistory **history_head);
 void book_seats(address_Seat head, SeatHistory **history_head);
 void clear_history(SeatHistory **history_head);
 void display_history(SeatHistory *history_head);
+void tampilkan_kursi_tersedia();
+void pesan_kursi(int pilihan_film, int jumlah_kursi, int pembayaran);
 #endif

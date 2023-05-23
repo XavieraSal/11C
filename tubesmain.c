@@ -3,14 +3,16 @@
 
 int main() {
 	warna();
+	int pilihan_film, jumlah_kursi, pembayaran;
+    int lanjut = 1;
 	address c,
-	        plgn1,
-	        plgn2,
-	        bukti;
+			plgn1,
+			plgn2,
+			bukti;
 	address_studio sTemp,
-	               s;
+				   s;
 	address_loket Loket = Nil,
-	              Lkt;
+				  Lkt;
 	address_film now = Nil,
 	             head = Nil;
 	address_Seat depan = Nil;
@@ -19,12 +21,12 @@ int main() {
 	infotype input;
 	char ulang = 'y';
 	int cho,
-	    pil,
-	    validInput,
-	    i,
-	    n,
-	    num_seats,
-	    seat_num;
+		pil,
+		validInput,
+		i,
+		n,
+		num_seats,
+		seat_num;
 	SeatHistory *history_head = Nil;
 
 
@@ -45,10 +47,10 @@ int main() {
 		printf("\t\t\t\t\xC0\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xD9\n");
 		printf("\t\t\tInput : ");
 		scanf("%d", &pil);
-
 		switch(pil) {
 
 			case 1:
+				
 //				printf("%d", Loket->loket);
 				validInput = 0;
 				while (!validInput) {
@@ -96,11 +98,17 @@ int main() {
 				printf("\n ini kondisi q2:\n");
 				PrintA(q2);
 				NodeToEmptyLoket(&q2.head, Loket_1, Loket_2);
-				printf("\n ini kondisi q2 setelah move node utk lkt:\n");
+				printf("\n ini kondisi q2 setelah move node utk lkt 1:\n");
 				PrintA(q2);
+				NodeToEmptyLoket(&q2.head, Loket_1, Loket_2);
+				printf("\n ini kondisi q2 setelah move node utk lkt 2:\n");
+				PrintA(q2);
+				
+				/*error
 				printf("ini print loket\n");
 				PrintIsiDuaLoket(Loket_1, Loket_2);
-
+				*/
+				
 				//alokasi loket
 //				address_loket Loket_1 = Locket(1, sTemp, q.head);
 //				address_loket Loket_2 = Locket(2, sTemp, q.head);
@@ -195,55 +203,35 @@ int main() {
 //					printf("%s", bukti->nm_cus);
 //				}
 
-				do {
-					printf("1. Buat kursi\n");
-					printf("2. Tampilkan kursi\n");
-					printf("3. Book seat(s)\n");
-					printf("4. Clear booking history\n");
-					printf("5. Display booking history\n");
-					scanf("%d",&pil);
+			printf("Daftar film yang sedang tayang:\n");
+    printf("1. Film BATMAN\n");
+    printf("2. Film DUNE\n");
+    printf("3. Film BARBIE\n");
 
-					switch(pil) {
-						case 1:
-							system("cls");
-							depan = create_seats();
-							printf("Cinema seats created successfully.\n");
-							break;
-						case 2:
-							display_seats(depan);
-							break;
-						case 3:
-							printf("\n1. Book single seat\n");
-							printf("2. Book multiple seats\n");
-							printf("\nEnter your choice: ");
-							scanf("%d", &pil);
+    while (lanjut) {
+        printf("Pilih film yang ingin ditonton (1-3): ");
+        scanf("%d", &pilihan_film);
 
-							switch(pil) {
-								case 1:
-									printf("\nEnter seat number: ");
-									scanf("%d", &seat_num);
-									book_seat(depan, 1, &history_head);
-									break;
-								case 2:
-									book_seats(depan, &history_head);
-									break;
-								default:
-									printf("\nInvalid choice. Please try again.\n");
-									break;
-							}
-							break;
-						case 4:
-							clear_history(&history_head);
-							printf("\nBooking history cleared.\n");
-							break;
-						case 5:
-							printf("\nBooking history:\n");
-							display_history(history_head);
-							break;
-					}
+        printf("Berapa banyak kursi yang ingin Anda pesan? ");
+        scanf("%d", &jumlah_kursi);
 
-					ulang = getche();
-				} while (ulang== 'y' || ulang == 'Y');
+        printf("Masukkan jumlah pembayaran: ");
+        scanf("%d", &pembayaran);
+
+        tampilkan_kursi_tersedia();
+
+        if (pilihan_film >= 1 && pilihan_film <= JUMLAH_FILM) {
+            printf("Anda telah memilih Film %c.\n", 'A' + pilihan_film - 1);
+            pesan_kursi(pilihan_film - 1, jumlah_kursi, pembayaran);
+        } else {
+            printf("Pilihan film tidak valid.\n");
+        }
+
+        tampilkan_kursi_tersedia();
+
+        printf("Apakah Anda ingin melakukan pembelian lagi? (1 = Ya, 0 = Tidak): ");
+        scanf("%d", &lanjut);
+    }
 		}
 		printf("\nApakah ingin kembali ke menu?");
 		fflush(stdin);
