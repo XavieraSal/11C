@@ -97,12 +97,10 @@ typedef struct node {
 void enqueue(antrean *q, infotype data, address_studio st);
 void PrintA(antrean c);
 void moveNode(antrean *q1, antrean *q2, infotype data);
-void moveToLoket(antrean *antreanQ, antrean *loketQ);
-void moveNodeToEmptyLoket(antrean *q, address_loket loket1, address_loket loket2);
-void PrintIsiLoket(address_loket loket);
-void PrintIsiDuaLoket(address_loket loket1, address_loket loket2);
-int getScreenWidth();
-int getScreenHeight();
+void NodeToEmptyLoket(address *q, address_loket loket1, address_loket loket2);
+void Print_Loket(address_loket loket);
+//int getScreenWidth();
+//int getScreenHeight();
 void warna();
 
 /*Arya*/
