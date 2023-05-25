@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include <conio.h>
 #include <unistd.h>
 #include <windows.h>
@@ -32,12 +33,20 @@ typedef struct seat {
     address_Seat next_seat;
 } Seat;
 
+typedef struct jam *address_jam;
+typedef struct jam {
+	infotype2 jamtyng;
+	address_jam next_jam;
+	address_Seat bwh_se;
+//	address_film next_fl;
+} Jam;
+
 typedef struct film *address_film;
 typedef struct film {
 	infotype nm_film;
-	infotype2 jm_tyg[3];
-	address_Seat bwh_se;
-	address_film next_fl;
+	address_jam jm_tyg;
+//	address_Seat bwh_se;
+//	address_film next_fl;
 } Film;
 
 typedef struct stud *address_studio;
@@ -50,7 +59,6 @@ typedef struct stud {
 typedef struct node_cus *address;
 typedef struct node_cus {
 	infotype nm_cus;
-	address prev;
 	address_studio cus_std[10];
 	address next;
 } customer;
@@ -102,11 +110,15 @@ int cekKosong (antrean q);
 address_studio sStudio (infotype1 j, address_film mov);
 address_loket alokasiLoket (infotype1 j, address_studio stud, address cust);
 address_loket Locket (infotype1 j, address_studio stud, address cust);
-address_film movie(infotype nama, infotype2 jam[3]);
+address_film movie(infotype nama, infotype2 sjam[][3]);
 address_studio add_studio(address_studio first);
 address_studio add_studio2(address_studio pirst);
-void add_film(address_film *first, address_film *now);
-void addPrintFilm(address_film *head, address_film *now, address_studio *first);
+
+address_jam Jamisasi(address_film f, infotype2 jam);
+address_jam Alokasi_Jam(/*address_jam j, */infotype2 jam);
+
+void add_film(address_studio *first, address_studio *now);
+void addPrintFilm(address_studio *head, address_studio *now, address_studio *first);
 void print_film(address_film current, address_studio *pirst);
 
 /*Vico*/
@@ -116,6 +128,6 @@ void book_seat(address_Seat head, int num_seats, SeatHistory **history_head);
 void book_seats(address_Seat head, SeatHistory **history_head);
 void clear_history(SeatHistory **history_head);
 void display_history(SeatHistory *history_head);
-void tampilkan_kursi_tersedia();
-void pesan_kursi(int pilihan_film, int jumlah_kursi, int pembayaran);
+//void tampilkan_kursi_tersedia();
+//void pesan_kursi(int pilihan_film, int jumlah_kursi, int pembayaran);
 #endif
